@@ -23,6 +23,7 @@ import type {
 import type {
   BlockHashConfig,
   BlockHeightConfig,
+  BlockInfo,
   ContractStateObservableConfig,
   FinalizedTxData,
   PublicDataProvider,
@@ -104,6 +105,9 @@ export function indexerPublicDataProvider(
     ): Rx.Observable<ContractState> {
       assertIsContractAddress(contractAddress);
       return inner.contractStateObservable(contractAddress, contractStateConfig);
+    },
+    queryBlock(queryConfig?: BlockHeightConfig | BlockHashConfig): Promise<BlockInfo | null> {
+      return inner.queryBlock(queryConfig);
     },
     queryContractState(
       contractAddress: ContractAddress,
